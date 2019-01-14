@@ -31,7 +31,7 @@ Characters.prototype.publishNames = function (data) {
 }
 
 Characters.prototype.characterList = function () {
-  const fullList = this.characterData.map(character => character.name);
+  const fullList = this.name.map(character => character.name);
   console.log(fullList);
   return fullList;
 }

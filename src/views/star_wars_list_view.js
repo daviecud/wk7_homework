@@ -7,9 +7,9 @@ const CharacterListView = function (container) {
 };
 console.log(CharacterListView);
 CharacterListView.prototype.bindEvents = function () {
-  PubSub.subscribe('Characters:characters-ready', (evt) => {
+  PubSub.subscribe('Characters:name-ready', (evt) => {
     const characters = evt.detail;
-    console.log(characters);
+    
 
     this.render(characters);
   });

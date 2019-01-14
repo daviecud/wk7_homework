@@ -10,6 +10,9 @@ SelectView.prototype.bindEvents = function () {
   });
 
   this.selectElement.addEventListener('change', (evt) => {
+    evt.preventDefault(
+      
+    )
     const selectedIndex = evt.target.value;
     PubSub.publish('SelectView:change', selectedIndex);
   });
