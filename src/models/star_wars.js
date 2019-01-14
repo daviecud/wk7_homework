@@ -1,58 +1,60 @@
 const Request = require('../helpers/request_helper.js');
 const PubSub = require('../helpers/pub_sub.js');
 
-const Character = function () {
+const Characters = function () {
   this.characterData = [];
-  this.names = [];
+  this.name = [];
 };
 
-Character.prototype.bindEvents = function () {
+Characters.prototype.bindEvents = function () {
   PubSub.subscribe('SelectView:change', (evt)  => {
-    const namesIndex = evt.detail;
-    this.publishCharacterByName(namesIndex);
+    const nameIndex = evt.detail;
+    this.publishCharactersByName(nameIndex);
   })
 };
 
 
-Character.prototype.getData = function(){
+Characters.prototype.getData = function(){
   const request = new Request('https://swapi.co/api/people/?format=json');
   request.get().then((data) => {
     this.characterData = data;
-    PubSub.publish('Character:characters-ready', this.characterData);
+    PubSub.publish('Characters:characters-ready', this.characterData);
     this.publishNames(data);
   });
 }
 
-Character.prototype.publishNames = function (data) {
+Characters.prototype.publishNames = function (data) {
   this.characterData = data;
-  this.names = this.uniqueNameList();
-  PubSub.publish('Character:names-ready', this.names);
+  this.name = this.uniqueNameList();
+  console.log(data);
+  PubSub.publish('Characters:name-ready', this.name);
 }
 
-Character.prototype.characterList = function () {
-  const fullList = this.characterData.map(character => character.names);
+Characters.prototype.characterList = function () {
+  const fullList = this.characterData.map(character => character.name);
+  console.log(fullList);
   return fullList;
 }
 
-Character.prototype.uniqueNameList = function () {
+Characters.prototype.uniqueNameList = function () {
   return this.characterList().filter((character, index, array) => {
     return array.indexOf(character) === index;
   });
 }
 
-Character.prototype.charactersByName = function (namesIndex) {
-  const selectedName = this.names[namesIndex];
+Characters.prototype.charactersByName = function (nameIndex) {
+  const selectedName = this.name[nameIndex];
   return this.characterData.filter((character) => {
-    return character.names === selectedName;
+    return character.name === selectedName;
   });
 };
 
-Character.prototype.publishCharactersByName = function (namesIndex) {
-  const foundCharacters = this.charactersByName(namesIndex);
-  PubSub.publish('Character:characters-ready', foundCharacters);
+Characters.prototype.publishCharacterssByName = function (nameIndex) {
+  const foundCharacters = this.charactersByName(nameIndex);
+  PubSub.publish('Characters:characters-ready', foundCharacters);
 };
 
-module.exports = Character;
+module.exports = Characters;
 
 
 
@@ -135,7 +137,7 @@ module.exports = Character;
 // // // StarWars.prototype.bindEvents = function () {
 // // //   PubSub.subscribe('SelectView:change', (event) => {
 // // //     const characterIndex = event.detail;
-// // //     this.publishStarWarsByCharacter()
+// // //     this.publishStarWarsByCharacters()
 // // //   })
 // // // };
 // //

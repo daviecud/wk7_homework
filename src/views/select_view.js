@@ -5,7 +5,7 @@ const SelectView = function (selectElement) {
 };
 
 SelectView.prototype.bindEvents = function () {
-  PubSub.subscribe('Character:names-ready', (event) => {
+  PubSub.subscribe('Characters:names-ready', (event) => {
     this.populateSelect(event.detail);
   });
 

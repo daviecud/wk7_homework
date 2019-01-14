@@ -1,4 +1,27 @@
 body {
+  margin: 20px;
+  background-image: url('../../images/stars.jpg');;
+  background-position: center;
   background-color: black;
   color: gold;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  border: 10px solid gold;
+  border-radius: 10px;
+  text-align: center;
+  width: 50%;
+  font-family: 'Lato', sans-serif;
+}
+
+#character-select {
+  color: red;
+  font-weight: bolder;
+  text-align: center;
+}
+
+
+#character-list {
+  font-family:  'Lato', sans-serif;
 }
