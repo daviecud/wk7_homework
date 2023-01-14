@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "swapi-node": "^0.4.4",
-    "webpack-cli": "^3.2.1",
+    "webpack-cli": "^3.3.12",
     "webpack": "^4.28.4"
   },
   "devDependencies": {},
